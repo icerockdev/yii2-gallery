@@ -21,12 +21,13 @@ class ImagesController extends Controller
 
     public function actionImageByItemAndAlias($item = '', $dirtyAlias)
     {
+        Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
         $dotParts = explode('.', $dirtyAlias);
-        
+
         if(!isset($dotParts[1])){
             throw new yii\web\HttpException(404, 'Image must have extension');
         }
-        
+
         $dirtyAlias = $dotParts[0];
 
         $size = isset(explode('_', $dirtyAlias)[1]) ? explode('_', $dirtyAlias)[1] : false;
@@ -38,7 +39,8 @@ class ImagesController extends Controller
         }
 
         if($image){
-            header('Content-Type: image/jpg');
+            $headers = Yii::$app->response->headers;
+            $headers->add('Content-Type', 'image/jpg');
             echo $image->getContent($size);
         }else{
             throw new \yii\web\HttpException(404, 'There is no images');
