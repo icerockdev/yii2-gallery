@@ -28,7 +28,7 @@ dvizh.gallery = {
             data: data,
             success: function (result) {
                 var json = $.parseJSON(result);
-                if (json.result == 'success') {
+                if (json.result === 'success') {
                     modalContainer.modal('hide');
                 }
                 else {
@@ -54,7 +54,7 @@ dvizh.gallery = {
         });
     },
     deleteProductImage: function () {
-        if (confirm('realy?')) {
+        if (confirm('Really?')) {
             dvizh.gallery._sendData($(this).data('action'), $(this).parents('.dvizh-gallery-item').data());
             $(this).parents('.dvizh-gallery-item').hide('slow');
         }
@@ -66,7 +66,7 @@ dvizh.gallery = {
             {image: data.image, id: data.id, model: data.model},
             function (answer) {
                 var json = $.parseJSON(answer);
-                if (json.result == 'success') {
+                if (json.result === 'success') {
 
                 }
                 else {
